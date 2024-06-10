@@ -13,7 +13,7 @@ import AddChallenge from './pages/AddChallenge.jsx';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "*",
     element: <App />
   },
   {
@@ -33,7 +33,6 @@ const router = createBrowserRouter([
     element: <App/>
   }
 ])
-console.log(pageType)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -12,17 +12,18 @@ const initialErrorsState={
         api:''
 }
 
-const Authentication = (pageType) => {
+const Authentication = ({pageType}) => {
         const [cookies, setCookie] = useCookies(['jwt']);
         const navigate=useNavigate();
+        const [email,setEmail]=useState('')
+        const [password,setPassword]=useState('')
+        const [errors,setErrors]=useState(initialErrorsState)
         // useEffect(()=>{
         //         if(cookies){
         //                 navigate('/')
         //         }
         // })
-        const [email,setEmail]=useState('')
-        const [password,setPassword]=useState('')
-        const [errors,setErrors]=useState(initialErrorsState)
+        
         const handleEmailChange=(e)=>{
                 setEmail(e.target.value)
         }
@@ -51,14 +52,14 @@ const Authentication = (pageType) => {
                         return
                 }
                 //call api
-                if(pageType===pageType.REGISTER){
+                if(pageType===1){
                         const [response,error] =await registerApi ({
                                 user: {
                                         email:email,
                                         password:password
                                 }
                         })
-                        handleResponse(response,error)
+                        handleResponse([response,error])
 
                 }else{
                        const [response,error] =await logInApi({
@@ -92,7 +93,7 @@ const Authentication = (pageType) => {
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className=" ">
                         <h3 className="font-bold text-2xl">
-                             {(pageType===pageType.REGISTER)?'Register ': 'Log In'}
+                             {(pageType===1)?'Register ': 'Log In'}
                         </h3>
                         <form onSubmit={handleSubmit} className="mt-10 max-w-96 flex flex-col gap-4">
                                 <div>
@@ -121,24 +122,8 @@ const Authentication = (pageType) => {
                                 parentClassName='bg-red-300'
                                 onClick={handleSubmit}
                                 >
-                                {(pageType===pageType.REGISTER)?'Register ' : 'Log In'}
+                                {(pageType===1)?'Register ' : 'Log In'}
                                 </Button>
-                                
-                                <div className=" bg-indigo-300 rounded hover:-translate-x-0.5 hover:-translate-y-0.5">
-                                     <button 
-                                      className="w-full bg-indigo-300 text-black hover:bg-indigo-600 hover:-text-white px-2 py-2 hover:-translate-x-1.5 hover:-translate-y-1.5"
-                                       type="submit">
-                                        {(pageType===pageType.REGISTER)?'Register' : 'Log In'}
-                                       </button>
-                                </div>
-
-                                 {/* <button 
-                                 className="bg-indigo-500 hover:bg-indigo-700 px-2 py-2"
-                                 type="submit">
-                                 {(pageType===pageType.LOGIN)?'Log In' : 'Register'}
-                                 </button>
-
-                                 {errors.api && <p className="text-sm text-red-500">{errors.api}</p>} */}
                         </form>
     </div>
     </div>

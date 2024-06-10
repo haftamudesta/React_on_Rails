@@ -1,7 +1,6 @@
 
 import { useCookies } from 'react-cookie';
 import { getActiveAndUpcomingChallenges } from '../apis/challenges';
-import { addChallenge } from "../apis/challenges";
 import { useEffect, useState } from 'react';
 import ChallengeCard from '../components/ChallengeCard';
 
@@ -24,9 +23,7 @@ const ChallengeList = () => {
     if (error){
             //to dohandle error
     }else{
-            console.log("response",response)
             const data=await response.json()
-            console.log("data",data)
             setActiveChallenges(data.active)
             setUpcomingChallenges(data.upcoming)
 
