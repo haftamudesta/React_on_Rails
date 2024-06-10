@@ -53,3 +53,32 @@ export const addChallenge=async (jwtToken,objectBody)=>{
       }
       
       
+
+
+
+      export const getChallengeById=async (jwtToken,id)=>{
+        const requestOptions = {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': jwtToken
+              },
+            };
+      
+      
+              try {
+                      const response =await fetch(`${BASE_API}/challenges/${id}`,requestOptions);
+                      if (response.ok) {
+                              return [response,'']
+                      }
+                      if(response.status==422){
+                        return ['','Unauthorized user. can not add challenge']
+                      }
+                      const erroeMessage=await response.text()
+                      return ['',`server side error ${erroeMessage}`]
+                    } catch (error) {
+                      return ['',`server down:${error}`]
+                    }
+      }
+      
+      

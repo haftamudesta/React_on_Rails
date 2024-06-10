@@ -1,5 +1,6 @@
 import placeholderImag from "../assets/placeholder.svg"
 import { formatDate } from "../utlities/date"
+import {Link} from "react-router-dom"
 const ChallengeCard = ({challenge}) => {
         const startDate=new Date(challenge.start_date)
         const endDate=new Date(challenge.end_date)
@@ -17,13 +18,16 @@ const ChallengeCard = ({challenge}) => {
                 }
         }
   return (
-    <div className="flex flex-col border border-black p-2">
-        <img className="aspect-square" src={placeholderImag} alt="placeholder" />
-        <div className="p-2">
-                <h1 className="font-medium">{challenge.title}</h1>
-                {dateText()}       
-        </div>
-    </div>
+        <Link to={`/challenge/${challenge.id}`}>
+           <div className="flex flex-col border border-black p-2">
+                <img className="aspect-square" src={placeholderImag} alt="placeholder" />
+                 
+                <div className="p-2">
+                     <h1 className="font-medium">{challenge.title}</h1>
+                     {dateText()}       
+                </div>
+             </div>
+        </Link>
   )
 }
 

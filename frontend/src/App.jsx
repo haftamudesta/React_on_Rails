@@ -1,17 +1,23 @@
- import Feature from "./components/Feature"
+import { Route,Routes } from "react-router-dom"
+import Feature from "./components/Feature"
 import Footer from "./components/Footer"
 import Navbar from "./components/Navbar"
 import ChallengeList from "./container/ChallengList"
+import Challenge from "./pages/Challenge"
 
 function App() {
   return (
     <main>
     <Navbar/>
-    <ChallengeList />
-    <Feature/>
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-      </h1>
+    <Routes>
+      <Route path="/" element={
+        <>
+          <ChallengeList />
+          <Feature/>
+        </>
+      }/>
+<     Route path="/challenge/:id" element={<Challenge />}/>
+    </Routes>
     <Footer/>
     </main>
   )

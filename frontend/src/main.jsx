@@ -27,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/add_challenge",
     element: <AddChallenge />
+  },
+  {
+    path: "/*",
+    element: <App/>
   }
 ])
 console.log(pageType)
